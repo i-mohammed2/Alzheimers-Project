@@ -41,14 +41,12 @@ pickle.dump((camera_matrix, dist), open("calibration.pk1", "wb"))
 pickle.dump(camera_matrix, open("camera_matrix.pk1", "wb"))
 pickle.dump(dist, open("dist.pk1", "wb"))
 
-img = cv.imread('images/img0.png')
+img = cv.imread('images/img1.png')
 h, w = img.shape[:2]
 newcameramtx, roi = cv.getOptimalNewCameraMatrix(camera_matrix, dist, (w,h), 1, (w,h))
 
-dst = cv.undistort(img, camera_matrix, dist, None, newcameramtx)
+dst = cv.undistort(img, camera_matrix, dist)
 
-x, y, w, h = roi
-dst = dst[y:y+h, x:x+w]
 cv.imwrite('calibresult.png', dst)
 
 mean_error = 0

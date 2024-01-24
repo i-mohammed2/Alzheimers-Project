@@ -4,16 +4,6 @@ from cv2 import calibrateCamera
 import numpy as np
 
 
-CHECKERBOARD = (5,7)
-MIN_POINTS = 50
-RECORD = True
-criteria = (cv.TERM_CRITERIA_EPS + cv.TERM_CRITERIA_MAX_ITER, 30, 0.001)
-objp = np.zeros((1, 5*7, 3), np.float32)
-objp[0, :, :2] = np.mgrid[0:5,0:7].T.reshape(-1,2)
-
-objpoints = []
-imgpoints = []
-
 # Load a model
 model = YOLO('yolov8n-pose.pt')  # load an official model
 model2 = YOLO('yolov8n-pose.pt')
