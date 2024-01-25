@@ -1,0 +1,18 @@
+from ultralytics import YOLO
+import cv2 as cv
+from cv2 import calibrateCamera
+import numpy as np
+
+
+model = YOLO('yolov8n-pose.pt')  # load an official model
+model2 = YOLO('yolov8n-pose.pt')
+#model = YOLO('path/to/best.pt')  # load a custom model
+source = 'rtsp://192.168.1.186:554/stream/main'
+source2 = 'rtsp://192.168.1.185:554/stream/main'
+
+results = model.predict(source, show=True, stream=True)  # predict on video
+results2 = model2.predict(source2, show = True, stream = True)
+
+#save the keypoints to a file
+np.save('keypoints.npy', results.xyxy[0])
+np.save('keypoints2.npy', results2.xyxy[0])
