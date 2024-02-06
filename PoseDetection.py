@@ -13,11 +13,16 @@ source2 = 'rtsp://192.168.1.185:554/stream/main'
 # Predict with the model
 #results = model()  # predict on an image
 
-results = model.predict(source, show=True, stream=True)  # predict on video
-results2 = model2.predict(source2, show = True, stream = True)
+results = model(source, show=True, save = True, stream=True)  # predict on video
+results2 = model2(source2, show = True, save = True, stream = True)
 
-print(results.keypoints)
-print(results2.keypoints)
+for r in results:
+    boxes = r.boxes
+    masks = r.masks
+    keypoints = r.keypoints
+    probs = r.probs
+    print(keypoints)
+    
 # camera_matrix1 = np.array([[fx1, 0, cx1], [0, fy1, cy1], [0, 0, 1]])
 # camera_matrix2 = np.array([[fx2, 0, cx2], [0, fy2, cy2], [0, 0, 1]])
 
